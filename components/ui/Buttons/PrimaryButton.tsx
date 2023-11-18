@@ -16,7 +16,7 @@ const PrimaryButton = ({
       type={type}
       disabled={loading}
       onClick={onClick}
-      className="primary border p-3"
+      className="primary border p-3 bg-slate-300"
     >
       <span>{text}</span> 
     </button>

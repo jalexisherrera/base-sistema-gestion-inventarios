@@ -10,7 +10,7 @@ declare module 'next-auth' {
     user: {
       id: string;
       image?: string;
-      role: Enum_RoleName?;
+      role: Role?;
       name: string;
     };
   }

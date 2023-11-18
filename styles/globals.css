@@ -6,3 +6,8 @@
 .border{
     border: 1px solid black;
 }
+
+h1 {
+    @apply text-3xl font-semibold tracking-wider text-gray-900;
+  }
+  
