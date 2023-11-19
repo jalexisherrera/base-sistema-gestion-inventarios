@@ -12,6 +12,8 @@ declare module 'next-auth' {
       image?: string;
       role: Role?;
       name: string;
+      createdAt: string;
+      roleId: string;
     };
   }
 }

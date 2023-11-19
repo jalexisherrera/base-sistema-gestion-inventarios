@@ -1,9 +1,7 @@
-interface ButtonProps {
-  loading: boolean;
-  text: string;
-  onClick: () => void;
-  type?: "button";
-}
+import { Spinner } from "../Spinner";
+import { ButtonProps } from './types';
+
+
 
 const PrimaryButton = ({
   loading,
@@ -17,8 +15,7 @@ const PrimaryButton = ({
       disabled={loading}
       onClick={onClick}
       className="primary border p-3 bg-slate-300"
-    >
-      <span>{text}</span> 
+    > {loading ? <Spinner /> : <span>{text}</span>}
     </button>
   );
 };

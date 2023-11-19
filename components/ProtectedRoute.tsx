@@ -19,8 +19,6 @@ const ProtectedRoute = ({ children, roleName }: ProtectedRouteProps) => {
       <div className="h-auto flex flex-row">
         <SideBar />
         <main className="flex flex-col h-screen w-full items-center justify-center gap-4">
-          
-
           <h1 className="text-red-500">
             No tienes permisos para acceder a esta página.
           </h1>

@@ -1,7 +1,4 @@
-const index = () => {
-  return (
-    <div>index</div>
-  );
-};
+import { PrimaryButton } from './PrimaryButton';
+import { SecondaryButton } from './SecondaryButton';
 
-export {index};
+export { PrimaryButton, SecondaryButton };

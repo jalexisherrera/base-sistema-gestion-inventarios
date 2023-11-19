@@ -44,6 +44,7 @@ CREATE TABLE "User" (
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
+
 -- CreateTable
 CREATE TABLE "Material" (
     "id" TEXT NOT NULL,
@@ -122,3 +123,5 @@ ALTER TABLE "InventoryMovement" ADD CONSTRAINT "InventoryMovement_materialId_fke
 
 -- AddForeignKey
 ALTER TABLE "InventoryMovement" ADD CONSTRAINT "InventoryMovement_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE "User" ADD "createdAt" timestamp(3) not null default current_timestamp;
