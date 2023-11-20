@@ -1,9 +1,10 @@
 import { PrivateComponent } from "@/components/PrivateComponent";
-import { PrimaryButton } from "../Buttons/PrimaryButton";
-import Profile from "./Profile";
+import { PrimaryButton } from "@/components/ui/Buttons/PrimaryButton";
+import { Profile } from "@/components/ui/SideBar/Profile";
 import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 
-const index = () => {
+const SideBar = () => {
   const router = useRouter();
   type AllowedRoutes = "/inventory" | "/materials" | "/users";
 
@@ -40,9 +41,21 @@ const index = () => {
             }}
           />
         </PrivateComponent>
+
+
+      </div>
+      <div className="mt-auto self-end">
+        <PrimaryButton
+          text="Log out"
+          loading={false}
+          onClick={() => {
+            signOut();
+          }}
+        />
       </div>
     </aside>
   );
+
 };
 
-export default index;
+export { SideBar }

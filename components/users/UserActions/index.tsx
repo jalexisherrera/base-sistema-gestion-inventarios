@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdModeEditOutline } from "react-icons/md";
-import { User } from "@/types";
+import { User } from "@/types/user";
 import { EditUserDialog } from "@/components/users/EditUserDialog";
 
 interface UserActionsProps {

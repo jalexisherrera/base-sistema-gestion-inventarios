@@ -1,4 +1,4 @@
-import SideBar from '@/components/ui/SideBar';
+import { SideBar } from '@/components/ui/SideBar';
 import { useSession } from 'next-auth/react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
