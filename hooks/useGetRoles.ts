@@ -1,5 +1,5 @@
 import { API_ROUTES, fetcher } from '@/service/apiConfig';
-import { RolesQuery } from '@/types';
+import { RolesQuery } from '@/types/user';
 import useSWR from 'swr';
 
 const useGetRoles = () => {

@@ -1,6 +1,6 @@
 import { Dialog } from "@/components/ui/Dialog";
 import { API_ROUTES } from "@/service/apiConfig";
-import { User } from "@/types";
+import { User } from "@/types/user";
 import { Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -60,7 +60,7 @@ const EditUserDialog = ({ open, setOpen, user }: EditUserDialogInterface) => {
             defaultValue={user.email}
             value={userInformation.email}
             className=" bg-gray-300 pointer-events-none"
-           />
+          />
         </label>
         <label htmlFor="user-role">
           <span>
@@ -93,7 +93,7 @@ const EditUserDialog = ({ open, setOpen, user }: EditUserDialogInterface) => {
           <PrimaryButton
             loading={editLoading}
             text="Save"
-            onClick={() => {}}
+            onClick={() => { }}
             type="submit"
           />
           <SecondaryButton

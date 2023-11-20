@@ -1,11 +1,8 @@
 import { PrimaryButton } from "@/components/ui/Buttons/PrimaryButton";
-import SideBar from "@/components/ui/SideBar";
 import { useSession, signIn } from "next-auth/react";
 
 const Home = () => {
-  const { data, status } = useSession();
-
-  console.log(data?.user.role?.name);
+  const { status } = useSession();
 
   if (status === "loading") return <div>Loading...</div>;
 

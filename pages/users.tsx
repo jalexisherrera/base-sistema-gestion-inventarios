@@ -1,10 +1,6 @@
-import Image from "next/image";
-//import { UserActions } from '@/components/users/UserActions';
 import { useGetRoles } from "@/hooks/useGetRoles";
 import { useGetUsers } from "@/hooks/useGetUsers";
-import { useState } from "react";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import SideBar from "@/components/ui/SideBar";
 import { UserActions } from "@/components/users/UserActions";
 
 const UsersPageWrapper = () => {

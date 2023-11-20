@@ -1,5 +1,5 @@
 import { API_ROUTES, fetcher } from '@/service/apiConfig';
-import { UsersQuery } from '@/types';
+import { UsersQuery } from '@/types/user';
 import useSWR, { mutate } from 'swr';
 
 const refetchUsers = async () => {
