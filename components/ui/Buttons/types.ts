@@ -1,6 +1,6 @@
 export interface ButtonProps {
   loading: boolean;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
 }

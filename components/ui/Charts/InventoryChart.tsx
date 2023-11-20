@@ -1,14 +1,10 @@
 import React from 'react';
 import { Inventory, calculateBalance } from '@/types/inventory';
 import { Line } from 'react-chartjs-2';
-import { CategoryScale, Chart, ChartData, ChartOptions, LineElement, LinearScale, PointElement } from 'chart.js';
+import { CategoryScale, Chart, ChartData, LineElement, LinearScale, PointElement } from 'chart.js';
 
 interface InventoryChartProps {
   inventories: Inventory[] | undefined;
-}
-interface LineProps {
-  options: ChartOptions<'line'>;
-  data: ChartData<'line'>;
 }
 
 const InventoryChart: React.FC<InventoryChartProps> = ({ inventories }) => {

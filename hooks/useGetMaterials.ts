@@ -1,6 +1,11 @@
 import { API_ROUTES, fetcher } from "@/service/apiConfig";
 import { MaterialsQuery } from "@/types/material";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+
+const refetchMaterials = async () => {
+    await mutate(API_ROUTES.materials);
+};
+
 
 const useGetMaterials = () => {
     const { data, isLoading, error } = useSWR<MaterialsQuery>(
@@ -15,4 +20,4 @@ const useGetMaterials = () => {
     };
 };
 
-export { useGetMaterials }
+export { useGetMaterials, refetchMaterials }
