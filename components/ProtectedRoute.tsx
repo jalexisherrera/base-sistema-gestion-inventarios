@@ -2,7 +2,7 @@ import { Enum_RoleName } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { PrivateRoute } from "./PrivateRoute";
 import Link from "next/link";
-import SideBar from "./ui/SideBar";
+import { SideBar } from "./ui/SideBar";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
