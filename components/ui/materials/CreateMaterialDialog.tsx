@@ -33,7 +33,11 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
     const createMaterial = async (e: SyntheticEvent) => {
         e.preventDefault();
         setIsLoading(true);
-
+        if (materialInformation.name === "") {
+            toast.error("Name is required");
+            setIsLoading(false);
+            return;
+        }
         try {
             await axios.request({
                 method: "POST",
@@ -61,6 +65,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
                     <input
                         name='name'
                         type='text'
+                        required
                         value={materialInformation.name}
                         onChange={handleInputChange}
                         className=" bg-gray-300"
@@ -73,6 +78,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
                     <input
                         name='quantity'
                         type='number'
+                        required
                         value={materialInformation.quantity}
                         onChange={handleInputChange}
                         className=" bg-gray-300"
@@ -88,6 +94,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
                         onClick={() => setOpen(false)}
                         text="Cancel"
                         loading={isLoading}
+                        type="button"
                     />
                 </div>
             </form>

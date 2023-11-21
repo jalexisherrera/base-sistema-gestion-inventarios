@@ -8,6 +8,7 @@ import { checkPrivateApi } from "@/utils/checkServerSession";
 type Data = {
     inventories?: InventoryMovement[];
     message?: string;
+    createdInventory?: InventoryMovement;
 };
 
 export default async function handler(
@@ -37,7 +38,47 @@ export default async function handler(
                 }
             );
             return res.status(200).json({ inventories });
+        } else if (req.method === "POST") {
+            const { materialId, quantity, movementType, email } = req.body;
+            const material = await prisma.material.findUnique({
+                where: {
+                    id: materialId
+                }
+            })
+            if (!material) {
+                return res.status(400).json({ message: 'Material not found' })
+            }
+            const createdInventory = await prisma.inventoryMovement.create({
+                data: {
+                    quantity: parseInt(quantity),
+                    movementType,
+                    createdBy: {
+                        connect: {
+                            email: email
+                        }
+                    },
+                    material: {
+                        connect: {
+                            id: materialId
+                        }
+                    }
+                }
+            })
+
+            const quantityMaterial = movementType.toUpperCase() === 'ENTRADA' ? parseInt(quantity) : parseInt(quantity) * -1;
+            if (material) {
+                await prisma.material.update({
+                    where: {
+                        id: materialId
+                    },
+                    data: {
+                        quantity: material.quantity + quantityMaterial
+                    }
+                });
+            }
+            return res.status(201).json({ createdInventory });
         }
+
 
         return res.status(405).json({ message: 'Method not allowed' });
     } catch (error) {

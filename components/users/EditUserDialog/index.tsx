@@ -100,6 +100,7 @@ const EditUserDialog = ({ open, setOpen, user }: EditUserDialogInterface) => {
             onClick={() => setOpen(false)}
             text="Cancel"
             loading={editLoading}
+            type="button"
           />
         </div>
       </form>
