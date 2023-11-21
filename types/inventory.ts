@@ -11,6 +11,11 @@ export interface Inventory {
 }
 
 
+export enum MovementType {
+    ENTRADA = "ENTRADA",
+    SALIDA = "SALIDA"
+}
+
 
 export interface InventoriesQuery {
     inventories: Inventory[];

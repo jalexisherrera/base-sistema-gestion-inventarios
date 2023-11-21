@@ -3,8 +3,10 @@ import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { PrimaryButton } from '@/components/ui/Buttons';
 import { Dropdown } from '@/components/ui/Buttons/Dropdown';
 import { InventoryChart } from '@/components/ui/Charts/InventoryChart';
+import { CreateInventoryDialog } from '@/components/ui/inventories/CreateInventoryDialog';
 import { refetchInventories, useGetInventoryByMaterialId } from '@/hooks/useGetInventories';
 import { useGetMaterials } from '@/hooks/useGetMaterials';
+import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { KeyValuePair } from 'tailwindcss/types/config';
 
@@ -19,7 +21,9 @@ const InventoryPageWrapper = () => {
 const InventoryPage = () => {
   const { materials, materialsError, materialsLoading } = useGetMaterials();
   const [materialSelected, setMaterialSelected] = useState<string | undefined>(materials?.at(0)?.id);
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const { inventories, inventoriesLoading, inventoriesError } = useGetInventoryByMaterialId(materialSelected);
+  const user = (useSession()).data?.user
 
   if (materialsLoading) return <div>Loading...</div>;
 
@@ -54,7 +58,7 @@ const InventoryPage = () => {
                 text="Add Inventory"
                 loading={false}
                 onClick={() => {
-                 
+                  setOpenCreateDialog(true);
                 }}
               />
           </PrivateComponent>
@@ -88,7 +92,13 @@ const InventoryPage = () => {
         <section className="flex justify-center">
           <InventoryChart inventories={inventories} />
         </section>
+        
       </div>
+      <CreateInventoryDialog
+        open={openCreateDialog}
+        setOpen={setOpenCreateDialog}
+        user={user}
+      />
     </div>
   );
 };
