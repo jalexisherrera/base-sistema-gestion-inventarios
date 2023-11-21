@@ -8,13 +8,13 @@ import { PrimaryButton } from "@/components/ui/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/ui/Buttons/SecondaryButton";
 import { refetchMaterials } from "@/hooks/useGetMaterials";
 
-interface CreateMaterialDialogProps {
+interface CreateInventoryDialogProps {
     open: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
     user: User;
 }
 
-const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps) => {
+const CreateInventoryDialog = ({ open, setOpen, user }: CreateInventoryDialogProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [materialInformation, setMaterialInformation] = useState({
         name: "",
@@ -33,11 +33,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
     const createMaterial = async (e: SyntheticEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        if (materialInformation.name === "") {
-            toast.error("Name is required");
-            setIsLoading(false);
-            return;
-        }
+
         try {
             await axios.request({
                 method: "POST",
@@ -99,4 +95,4 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
     );
 };
 
-export { CreateMaterialDialog };
+export { CreateInventoryDialog };
