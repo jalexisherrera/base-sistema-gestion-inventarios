@@ -94,6 +94,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
                         onClick={() => setOpen(false)}
                         text="Cancel"
                         loading={isLoading}
+                        type="button"
                     />
                 </div>
             </form>
