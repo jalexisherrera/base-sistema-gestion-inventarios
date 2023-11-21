@@ -1,4 +1,6 @@
+import { PrivateComponent } from '@/components/PrivateComponent';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { PrimaryButton } from '@/components/ui/Buttons';
 import { Dropdown } from '@/components/ui/Buttons/Dropdown';
 import { InventoryChart } from '@/components/ui/Charts/InventoryChart';
 import { refetchInventories, useGetInventoryByMaterialId } from '@/hooks/useGetInventories';
@@ -42,9 +44,21 @@ const InventoryPage = () => {
 
   return (
     <div className="flex w-full flex-col items-center gap-3 p-10">
-      <div className="flex w-full flex-col items-center gap-5">
+      <div className="flex flex-col items-center gap-5">
         <h1>Inventory Management</h1>
-        <Dropdown options={materialsOptions} onSelect={selectMaterial}></Dropdown>
+        <div className='flex flex-row w-full justify-between'>
+          <Dropdown options={materialsOptions} onSelect={selectMaterial}></Dropdown>
+
+          <PrivateComponent roleName="ADMIN">
+              <PrimaryButton
+                text="Add Inventory"
+                loading={false}
+                onClick={() => {
+                 
+                }}
+              />
+          </PrivateComponent>
+        </div>
         <section className="flex justify-center">
           <table cellSpacing="0">
             <thead>
