@@ -65,6 +65,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
                     <input
                         name='name'
                         type='text'
+                        required
                         value={materialInformation.name}
                         onChange={handleInputChange}
                         className=" bg-gray-300"
@@ -77,6 +78,7 @@ const CreateMaterialDialog = ({ open, setOpen, user }: CreateMaterialDialogProps
                     <input
                         name='quantity'
                         type='number'
+                        required
                         value={materialInformation.quantity}
                         onChange={handleInputChange}
                         className=" bg-gray-300"
