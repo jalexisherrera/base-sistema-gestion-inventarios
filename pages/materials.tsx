@@ -13,7 +13,7 @@ const MaterialsPage = () => {
   if (materialsLoading) return <div>Loading...</div>;
 
   if (materialsError) {
-    return <div>Error al cargar los datos</div>;
+    return <div>Error loading data</div>;
   }
 
   return (

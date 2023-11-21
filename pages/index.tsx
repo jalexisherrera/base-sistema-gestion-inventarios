@@ -9,17 +9,20 @@ const Home = () => {
   if (status === "authenticated")
     return (
       <main className="h-screen w-full flex items-center justify-center ">
-        <div></div>
-        <section>contenido central</section>
+        <div className="flex flex-col gap-7 items-center">
+          <h1>Welcome to the Inventory System</h1>
+          <h2>Please, select an option from the left bar</h2>
+        </div>
+        
       </main>
     );
 
   return (
     <main className="flex flex-col h-screen w-full items-center pt-80 gap-32">
-      <h1>Sistema de gestión de inventarios</h1>
+      <h1>Inventory management system</h1>
       <div>
         <PrimaryButton
-          text="Iniciar sesión"
+          text="Log In"
           loading={false}
           onClick={() => {
             signIn("auth0");

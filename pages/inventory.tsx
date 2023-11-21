@@ -28,10 +28,10 @@ const InventoryPage = () => {
   if (materialsLoading) return <div>Loading...</div>;
 
   if (materialsError) {
-    return <div>Error al cargar los datos</div>;
+    return <div>Error loading data</div>;
   }
 
-  if (materials?.length === 0 || materials === undefined) return <div>Debe crear al menos un material</div>;
+  if (materials?.length === 0 || materials === undefined) return <div>You must create at least one material</div>;
 
   const materialsOptions: KeyValuePair<string, string>[] = materials.map((material) => {
     return { key: material.id, value: material.name };
@@ -44,7 +44,7 @@ const InventoryPage = () => {
 
   if (inventoriesLoading) return <div>Loading...</div>;
 
-  if (inventoriesError) return <div>Error al cargar los datos</div>;
+  if (inventoriesError) return <div>Error loading data</div>;
 
   return (
     <div className="flex w-full flex-col items-center gap-3 p-10">

@@ -17,7 +17,7 @@ const UsersPage = () => {
 
   if (usersLoading || rolesLoading) return <div>Loading...</div>;
 
-  if (usersError) return <div>Error al cargar los datos</div>;
+  if (usersError) return <div>Error loading data</div>;
   
   return (
     <ProtectedRoute roleName="ADMIN">

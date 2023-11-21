@@ -8,8 +8,13 @@
 }
 
 h1 {
-    @apply text-5xl font-semibold tracking-wider text-gray-900;
-  }
+  @apply text-3xl font-semibold tracking-wider text-gray-900;
+}
+
+h2 {
+  @apply text-2xl font-medium tracking-wide text-gray-700;
+}
+
   
   table {
     @apply w-full text-left border border-separate rounded border-slate-200;

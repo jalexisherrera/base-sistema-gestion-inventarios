@@ -15,10 +15,10 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   return (
     <main className='flex flex-col h-screen w-full items-center justify-center gap-4'>
       <h1 className='text-red-500'>
-        Para acceder a esta página se requiere tener sesión iniciada.
+          To access this page you must be logged in.
       </h1>
       <Link href='/'>
-        <span className='text-blue-800 font-bold text-xl'>Ir al Home</span>
+        <span className='text-blue-800 font-bold text-xl'>Go Home</span>
       </Link>
     </main>
   );
