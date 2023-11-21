@@ -6,8 +6,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { PrimaryButton } from "@/components/ui/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/ui/Buttons/SecondaryButton";
-import { refetchMaterials, useGetMaterials } from "@/hooks/useGetMaterials";
+import { useGetMaterials } from "@/hooks/useGetMaterials";
 import { MovementType } from "@/types/inventory";
+import { refetchInventories } from "@/hooks/useGetInventories";
 
 interface CreateInventoryDialogProps {
     open: boolean;
@@ -21,12 +22,14 @@ const CreateInventoryDialog = ({ open, setOpen, user }: CreateInventoryDialogPro
     const [isLoading, setIsLoading] = useState(false);
     const { materials, materialsError, materialsLoading } = useGetMaterials();
 
-    const [inventoryInformation, setInventoryInformation] = useState({
-        movementType: "",
-        materialId: "",
+    const inicialInventoryInformation = {
+        movementType: "Select type movement",
+        materialId: "Select type material",
         email: user.email,
         quantity: 0
-    });
+    }
+
+    const [inventoryInformation, setInventoryInformation] = useState(inicialInventoryInformation);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -54,15 +57,20 @@ const CreateInventoryDialog = ({ open, setOpen, user }: CreateInventoryDialogPro
                 url: `${API_ROUTES.inventories}`,
                 data: { ...inventoryInformation },
             });
-            await refetchMaterials();
+            await refetchInventories();
             toast.success("Successfully created inventory");
         } catch (error) {
             toast.error("Error creating inventory");
         }
 
-        setOpen(false);
         setIsLoading(false);
+        closeDialog();
     };
+
+    const closeDialog = () => {
+        setOpen(false);
+        setInventoryInformation(inicialInventoryInformation)
+    }
 
     if (materialsLoading) return <div>Loading...</div>;
 
@@ -78,15 +86,15 @@ const CreateInventoryDialog = ({ open, setOpen, user }: CreateInventoryDialogPro
                         Material <span className="text-red-500">*</span>
                     </span>
                     <select
-                        name="material"
+                        name="materialId"
                         required
                         value={inventoryInformation.materialId}
                         onChange={(e) => handleSelectChange(e)
                         }
                     >
-                        <option disabled>Select type movement</option>
-                        {materials?.map((material) => (
-                            <option value={material.id} key={material.id}>
+                        <option disabled>Select type material</option>
+                        {materials?.map((material, index) => (
+                            <option value={material.id} key={index}>
                                 {material.name}
                             </option>
                         ))}
@@ -131,9 +139,10 @@ const CreateInventoryDialog = ({ open, setOpen, user }: CreateInventoryDialogPro
                         type="submit"
                     />
                     <SecondaryButton
-                        onClick={() => setOpen(false)}
+                        onClick={() => closeDialog()}
                         text="Cancel"
                         loading={isLoading}
+                        type="button"
                     />
                 </div>
             </form>
