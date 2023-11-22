@@ -31,7 +31,7 @@ export default async function handler(
             }
 
             );
-            res.status(200).json({ materials });
+            return res.status(200).json({ materials });
         } else if (req.method === "POST") {
             const { name, quantity, email } = req.body;
             const materialExists = await prisma.material.findUnique({
@@ -64,7 +64,7 @@ export default async function handler(
                     }
                 }
             })
-            res.status(201).json({ createdMaterial: material })
+            return res.status(201).json({ createdMaterial: material })
 
 
 
