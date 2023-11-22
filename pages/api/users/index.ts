@@ -26,7 +26,7 @@ export default async function handler(
     }
       
     );
-    res.status(200).json({ users });
+    return res.status(200).json({ users });
   }
 
   return res.status(405).json({message:'Method not allowed'})
