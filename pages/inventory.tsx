@@ -1,15 +1,16 @@
-import { PrivateComponent } from '@/components/PrivateComponent';
-import { PrivateRoute } from '@/components/PrivateRoute';
-import { ProtectedRoute } from '@/components/ProtectedRoute';
-import { PrimaryButton } from '@/components/ui/Buttons';
-import { Dropdown } from '@/components/ui/Buttons/Dropdown';
-import { InventoryChart } from '@/components/ui/Charts/InventoryChart';
-import { CreateInventoryDialog } from '@/components/ui/inventories/CreateInventoryDialog';
-import { refetchInventories, useGetInventoryByMaterialId } from '@/hooks/useGetInventories';
-import { useGetMaterials } from '@/hooks/useGetMaterials';
-import { useSession } from 'next-auth/react';
-import React, { useState } from 'react';
-import { KeyValuePair } from 'tailwindcss/types/config';
+import { PrivateRoute } from "@/components/PrivateRoute";
+import { PrimaryButton } from "@/components/ui/Buttons";
+import { Dropdown } from "@/components/ui/Buttons/Dropdown";
+import { InventoryChart } from "@/components/ui/Charts/InventoryChart";
+import { CreateInventoryDialog } from "@/components/ui/inventories/CreateInventoryDialog";
+import {
+  refetchInventories,
+  useGetInventoryByMaterialId,
+} from "@/hooks/useGetInventories";
+import { useGetMaterials } from "@/hooks/useGetMaterials";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
+import { KeyValuePair } from "tailwindcss/types/config";
 
 const InventoryPageWrapper = () => {
   return (
@@ -21,10 +22,13 @@ const InventoryPageWrapper = () => {
 
 const InventoryPage = () => {
   const { materials, materialsError, materialsLoading } = useGetMaterials();
-  const [materialSelected, setMaterialSelected] = useState<string | undefined>(materials?.at(0)?.id);
+  const [materialSelected, setMaterialSelected] = useState<string | undefined>(
+    materials?.at(0)?.id
+  );
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
-  const { inventories, inventoriesLoading, inventoriesError } = useGetInventoryByMaterialId(materialSelected);
-  const user = (useSession()).data?.user
+  const { inventories, inventoriesLoading, inventoriesError } =
+    useGetInventoryByMaterialId(materialSelected);
+  const user = useSession().data?.user;
 
   if (materialsLoading) return <div>Loading...</div>;
 
@@ -32,11 +36,14 @@ const InventoryPage = () => {
     return <div>Error loading data</div>;
   }
 
-  if (materials?.length === 0 || materials === undefined) return <div>You must create at least one material</div>;
+  if (materials?.length === 0 || materials === undefined)
+    return <div>You must create at least one material</div>;
 
-  const materialsOptions: KeyValuePair<string, string>[] = materials.map((material) => {
-    return { key: material.id, value: material.name };
-  });
+  const materialsOptions: KeyValuePair<string, string>[] = materials.map(
+    (material) => {
+      return { key: material.id, value: material.name };
+    }
+  );
 
   const selectMaterial = async (selectedOption: string) => {
     setMaterialSelected(selectedOption);
@@ -51,18 +58,19 @@ const InventoryPage = () => {
     <div className="flex w-full flex-col items-center gap-3 p-10">
       <div className="flex flex-col items-center gap-5">
         <h1>Inventory Management</h1>
-        <div className='flex flex-row w-full justify-between'>
-          <Dropdown options={materialsOptions} onSelect={selectMaterial}></Dropdown>
+        <div className="flex flex-row w-full justify-between">
+          <Dropdown
+            options={materialsOptions}
+            onSelect={selectMaterial}
+          ></Dropdown>
 
-
-              <PrimaryButton
-                text="Add Inventory"
-                loading={false}
-                onClick={() => {
-                  setOpenCreateDialog(true);
-                }}
-              />
-
+          <PrimaryButton
+            text="Add Inventory"
+            loading={false}
+            onClick={() => {
+              setOpenCreateDialog(true);
+            }}
+          />
         </div>
         <section className="flex justify-center">
           <table cellSpacing="0">
@@ -81,8 +89,16 @@ const InventoryPage = () => {
                   <tr key={inventory.id}>
                     <td>{inventory.id}</td>
                     <td>{inventory.createdAt.toLocaleString()}</td>
-                    <td>{inventory.movementType === "ENTRADA" ? inventory.quantity : ''}</td>
-                    <td>{inventory.movementType === "SALIDA" ? inventory.quantity : ''}</td>
+                    <td>
+                      {inventory.movementType === "ENTRADA"
+                        ? inventory.quantity
+                        : ""}
+                    </td>
+                    <td>
+                      {inventory.movementType === "SALIDA"
+                        ? inventory.quantity
+                        : ""}
+                    </td>
                     <td>{inventory.createdBy.name}</td>
                   </tr>
                 );
@@ -93,7 +109,6 @@ const InventoryPage = () => {
         <section className="flex justify-center">
           <InventoryChart inventories={inventories} />
         </section>
-        
       </div>
       <CreateInventoryDialog
         open={openCreateDialog}
