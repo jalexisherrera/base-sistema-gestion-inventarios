@@ -1,4 +1,5 @@
 import { PrivateComponent } from '@/components/PrivateComponent';
+import { PrivateRoute } from '@/components/PrivateRoute';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { PrimaryButton } from '@/components/ui/Buttons';
 import { Dropdown } from '@/components/ui/Buttons/Dropdown';
@@ -12,9 +13,9 @@ import { KeyValuePair } from 'tailwindcss/types/config';
 
 const InventoryPageWrapper = () => {
   return (
-    <ProtectedRoute roleName="ADMIN">
+    <PrivateRoute>
       <InventoryPage />
-    </ProtectedRoute>
+    </PrivateRoute>
   );
 };
 
@@ -53,7 +54,7 @@ const InventoryPage = () => {
         <div className='flex flex-row w-full justify-between'>
           <Dropdown options={materialsOptions} onSelect={selectMaterial}></Dropdown>
 
-          <PrivateComponent roleName="ADMIN">
+
               <PrimaryButton
                 text="Add Inventory"
                 loading={false}
@@ -61,7 +62,7 @@ const InventoryPage = () => {
                   setOpenCreateDialog(true);
                 }}
               />
-          </PrivateComponent>
+
         </div>
         <section className="flex justify-center">
           <table cellSpacing="0">
